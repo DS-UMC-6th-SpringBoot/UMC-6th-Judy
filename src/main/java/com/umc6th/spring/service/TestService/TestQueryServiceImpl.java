@@ -1,4 +1,4 @@
-package com.umc6th.spring.service;
+package com.umc6th.spring.service.TestService;
 
 import com.umc6th.spring.apiPayLoad.code.status.ErrorStatus;
 import com.umc6th.spring.apiPayLoad.exception.handler.TestHandler;

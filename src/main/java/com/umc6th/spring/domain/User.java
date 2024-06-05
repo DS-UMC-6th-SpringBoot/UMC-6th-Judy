@@ -7,6 +7,9 @@ import com.umc6th.spring.domain.mapping.UserFood;
 import com.umc6th.spring.domain.mapping.UserMission;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,6 +17,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@DynamicUpdate
+@DynamicInsert
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -34,9 +39,12 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 100)
     private String address;
 
+    private String specAddress;
+
+    @ColumnDefault("0")
     private Integer point;
 
-    @Column(nullable = false, length = 50)
+//    @Column(nullable = false, length = 50)
     private String email;
 
     private String img;
@@ -51,7 +59,7 @@ public class User extends BaseEntity {
     private List<Review> reviewList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserFood> uesrFoodList = new ArrayList<>();
+    private List<UserFood> userFoodList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserMission> userMissionList = new ArrayList<>();

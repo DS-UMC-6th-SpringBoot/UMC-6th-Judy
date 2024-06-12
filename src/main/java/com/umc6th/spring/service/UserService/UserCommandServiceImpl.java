@@ -8,7 +8,7 @@ import com.umc6th.spring.domain.FoodCategory;
 import com.umc6th.spring.domain.User;
 import com.umc6th.spring.domain.mapping.UserFood;
 import com.umc6th.spring.repository.FoodCategoryRepository;
-import com.umc6th.spring.repository.UserRespository;
+import com.umc6th.spring.repository.UserRepository;
 import com.umc6th.spring.web.dto.UserRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class UserCommandServiceImpl implements UserCommandService {
 
-    private final UserRespository userRespository;
+    private final UserRepository userRepository;
 
     private final FoodCategoryRepository foodCategoryRepository;
 
@@ -41,6 +41,6 @@ public class UserCommandServiceImpl implements UserCommandService {
 
         userFoodList.forEach(userFood -> {userFood.setUser(newUser);});
 
-        return userRespository.save(newUser);
+        return userRepository.save(newUser);
     }
 }

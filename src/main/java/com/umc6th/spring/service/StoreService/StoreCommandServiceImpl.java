@@ -18,6 +18,7 @@ public class StoreCommandServiceImpl implements StoreCommandService{
     private final RegionRepository regionRepository;
 
     @Override
+    @Transactional
     public Store createStore(StoreRequestDTO.AddStoreDTO requestDTO) {
         Region region = regionRepository.findById(requestDTO.getRegionId()).get();
         Store store = StoreConverter.toStore(requestDTO);

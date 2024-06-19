@@ -1,8 +1,8 @@
 package com.umc6th.spring.validation.validater;
 
 import com.umc6th.spring.apiPayLoad.code.status.ErrorStatus;
-import com.umc6th.spring.repository.RegionRepository;
-import com.umc6th.spring.validation.annotation.ExistRegions;
+import com.umc6th.spring.repository.UserRepository;
+import com.umc6th.spring.validation.annotation.ExistUsers;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
@@ -10,24 +10,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class RegionExistValidator implements ConstraintValidator<ExistRegions, Long> {
+public class UserExistValidator implements ConstraintValidator<ExistUsers, Long> {
 
-    private final RegionRepository regionRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public void initialize(ExistRegions constraintAnnotation) {
+    public void initialize(ExistUsers constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
-        boolean isValid = regionRepository.existsById(value);
+        boolean isValid = userRepository.existsById(value);
 
         if(!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.REGION_NOT_FOUND.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.USER_NOT_FOUND.toString()).addConstraintViolation();
         }
 
-        return isValid;
+        return false;
     }
 }

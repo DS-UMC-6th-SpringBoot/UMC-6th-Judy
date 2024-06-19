@@ -1,8 +1,12 @@
 package com.umc6th.spring.domain;
 
 import com.umc6th.spring.domain.common.BaseEntity;
+import com.umc6th.spring.domain.mapping.UserMission;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,4 +25,7 @@ public class Mission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
+
+    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
+    private List<UserMission> memberMissionList = new ArrayList<>();
 }

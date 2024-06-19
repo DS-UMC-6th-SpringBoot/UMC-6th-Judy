@@ -1,5 +1,6 @@
 package com.umc6th.spring.domain.mapping;
 
+import com.umc6th.spring.domain.Mission;
 import com.umc6th.spring.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,4 +24,8 @@ public class UserMission {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
 }
